@@ -1,5 +1,4 @@
 from typing import List
-import json as j
 from copy import deepcopy
 from typing import Dict, List
 from requests import get as _get, models
@@ -26,9 +25,10 @@ class ResponseWrapper:
   def source(self) -> List[dict]:
     return deepcopy(self._source)
   
-  def _get_models(self):
-    models = []
-    added = []
+  def _get_models(self) -> List[dict]:
+    """Returns list of unique JSON models"""
+    models: List[dict] = []
+    added: List[iter] = []
     for obj in self._source:
       if not obj.keys() in added:
         added.append(obj.keys())
