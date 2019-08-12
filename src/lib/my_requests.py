@@ -1,4 +1,4 @@
-from typing import List, Set
+from typing import List
 import json as j
 from copy import deepcopy
 from typing import Dict, List
@@ -16,7 +16,7 @@ class ResponseWrapper:
 
   def __init__(self, json):
     self._source: List[dict] = json
-    self._models: Set[dict] = self._get_models()
+    self._models: List[dict] = self._get_models()
     
   @property
   def models(self) -> str:

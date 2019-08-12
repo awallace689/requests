@@ -1,11 +1,12 @@
 import json as j
+from sys import argv
 from lib.my_requests import ResponseWrapper, get_json
 
 
-URL = 'https://api.github.com/repos/awallace689/requests/events'
+DEFAULT_URL = 'https://api.github.com/repos/awallace689/requests/events'
 
 
-def debug_response(resp: ResponseWrapper):
+def debug_response(resp: ResponseWrapper) -> None:
     def formatted_print(to_print, label: str) -> None:
         print(
             f'################ BEGIN {label}',
@@ -18,9 +19,11 @@ def debug_response(resp: ResponseWrapper):
     print(f'[source==models: {j.dumps(resp.models == resp.source)}]')
 
 
-def _main() -> None:
-    resp = ResponseWrapper(get_json(URL))
+def _main(url: str) -> None:
+    resp = ResponseWrapper(get_json(url))
+    debug_response(resp)
 
 
 if __name__ == "__main__":
-    _main()
+    URL = argv[1] if argv[1] else DEFAULT_URL
+    _main(URL)
