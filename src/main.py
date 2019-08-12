@@ -1,6 +1,6 @@
 import json as j
 from sys import argv
-from lib.my_requests import ResponseWrapper, get_json
+from lib.myrequests.getlib import ResponseWrapper, get_json
 
 
 DEFAULT_URL = 'https://api.github.com/repos/awallace689/requests/events'
