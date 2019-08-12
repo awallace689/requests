@@ -1,3 +1,4 @@
 .vscode/
 env/
 output.py
+__pycache__/
