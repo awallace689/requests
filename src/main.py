@@ -13,6 +13,7 @@ class run:
 
 class GitHub_Response:
     """'requests' response wrapper for api.github.com/repos/<user>/<repo>/events"""
+
     def __init__(self, json):
         self.source = json
         self._model = j.dumps(json[0], indent=2)
@@ -20,7 +21,6 @@ class GitHub_Response:
     @property
     def model(self) -> dict:
         return self._model
-            
 
 
 def get(url: str) -> requests.models.Request:
@@ -30,7 +30,8 @@ def get(url: str) -> requests.models.Request:
         run.call_count += 1
         return requests.get(url)
     else:
-        raise RuntimeError(f'ERROR: Call limit {str(run.call_count)} exceeded.')
+        raise RuntimeError(
+            f'ERROR: Call limit {str(run.call_count)} exceeded.')
 
 
 def get_json(url: str) -> dict:
@@ -43,29 +44,6 @@ def _main() -> None:
     resp = GitHub_Response(get_json(URL))
     print(resp.model)
 
-    
+
 if __name__ == "__main__":
     _main()
-
-
-# class C(object):
-
-
-# def __init__(self):
-#     self._x = None
-
-
-# @property
-# def x(self):
-#     """I'm the 'x' property."""
-#     return self._x
-
-
-# @x.setter
-# def x(self, value):
-#     self._x = value
-
-
-# @x.deleter
-# def x(self):
-#     del self._x
