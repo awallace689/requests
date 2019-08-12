@@ -25,5 +25,5 @@ def _main(url: str) -> None:
 
 
 if __name__ == "__main__":
-    URL = argv[1] if argv[1] else DEFAULT_URL
+    URL = argv[1] if len(argv) > 1 else DEFAULT_URL
     _main(URL)
