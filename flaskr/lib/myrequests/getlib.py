@@ -25,7 +25,7 @@ class ResponseWrapper:
 
   def print_info(self) -> None:
     """Print response source and unique models"""
-    def formatted_print(to_print: Any, label: str) -> None:
+    def formatted_print(to_print: Any | str, label: str) -> None:
       print(
         f'################ BEGIN {label}',
         to_print,
