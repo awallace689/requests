@@ -1,9 +1,11 @@
 # requests
-Python3 API request project.
+Python 3 Flask and Requests library project.
 
 # What
-Run src/main.py with an optional command line arg (URL) to view API response source and models.
+Library 'myrequests' wraps the popular 'requests' library. Flask creates a webpage with which to explore 'myrequests.'
 
 # Run
 1) py -m pip install -r requirements.txt
-2) py src/main.py <[OPTIONAL]api_url>
+2) Export or set FLASK_APP="flaskr/app.py".
+3) py -m flask run
+4) Navigate to 127.0.0.1:5000 in a browser of your choice.
