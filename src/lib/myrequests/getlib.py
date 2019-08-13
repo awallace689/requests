@@ -1,7 +1,9 @@
 from typing import List
 from copy import deepcopy
-from typing import Dict, List
+from typing import Dict, List, Any
+from json import dumps
 from requests import get as _get, models
+from asyncio import run
 
 
 class _run:
@@ -11,11 +13,30 @@ class _run:
 
 
 class ResponseWrapper:
-  """'requests' response wrapper for api.github.com/repos/<user>/<repo>/events"""
+  """'requests' library 'get' response wrapper"""
 
-  def __init__(self, json):
+  def __init__(self, json, debug=False):
     self._source: List[dict] = json
     self._models: List[dict] = self._get_models()
+    self.debug = debug
+    
+    if debug:
+      self.print_info()
+
+  def print_info(self) -> None:
+    """Print response source and unique models"""
+    def formatted_print(to_print: Any, label: str) -> None:
+      print(
+        f'################ BEGIN {label}',
+        to_print,
+        f'################ END {label}',
+        sep='\n')
+
+    formatted_print(dumps(self.source, indent=2), 'source')
+    formatted_print(dumps(self.models, indent=2), 'models')
+    print(
+      f'[source==models: {dumps(self.models == self.source)}]\n'
+      f'[# models: {len(self.models)}]')
     
   @property
   def models(self) -> str:
@@ -36,17 +57,17 @@ class ResponseWrapper:
     return models
   
 
-def get(url: str) -> models.Request:
+async def get(url: str) -> models.Request:
   """Restrict # of calls to _run.call_limit"""
   if _run.call_count < _run.call_limit:
     _run.call_count += 1
     return _get(url)
   else:
     raise RuntimeError(
-        f'ERROR: Call limit ({str(_run.call_count)}) exceeded.')
+      f'ERROR: Call limit ({str(_run.call_count)}) exceeded.')
 
 
-def get_json(url: str) -> dict:
+async def get_json(url: str) -> dict:
   """Get Request as dict (json)"""
-  resp = get(url)
+  resp = await get(url)
   return resp.json()
