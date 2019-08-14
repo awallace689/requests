@@ -16,12 +16,13 @@
       <h2>API is at: &lt{{URL}}&gt.</h2>
     {% endif %}
     <br />
-    <br />
-    {% if response %}
+    {% if models %}
       <h2>Response:</h2>
-      <p>{{response}}</p>
+      {% for obj in models %}
+        <div>{{obj}}</div>
+      {% endfor %}
     {% else %}
-      <h2>Repsonse: &lt<italic>None</italic>&gt</h2>
+      <h2>Response: &lt<i>None</i>&gt</h2>
     {% endif %}
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

@@ -25,7 +25,7 @@ class ResponseWrapper:
 
   def print_info(self) -> None:
     """Print response source and unique models"""
-    def formatted_print(to_print: Any | str, label: str) -> None:
+    def formatted_print(to_print: Any, label: str) -> None:
       print(
         f'################ BEGIN {label}',
         to_print,
@@ -57,7 +57,7 @@ class ResponseWrapper:
     return models
   
 
-async def get(url: str) -> models.Request:
+def get(url: str) -> models.Request:
   """Restrict # of calls to _run.call_limit"""
   if _run.call_count < _run.call_limit:
     _run.call_count += 1
@@ -67,7 +67,7 @@ async def get(url: str) -> models.Request:
       f'ERROR: Call limit ({str(_run.call_count)}) exceeded.')
 
 
-async def get_json(url: str) -> dict:
+def get_json(url: str) -> dict:
   """Get Request as dict (json)"""
-  resp = await get(url)
+  resp = get(url)
   return resp.json()
