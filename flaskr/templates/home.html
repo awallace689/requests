@@ -1,32 +1,69 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>API Response Viewer</h1>
-    {% if URL %}
-      <h2>API is at: &lt{{URL}}&gt.</h2>
-    {% endif %}
-    <br />
-    {% if models %}
-      <h2>Response:</h2>
-      {% for obj in models %}
-        <div>{{obj}}</div>
-      {% endfor %}
-    {% else %}
-      <h2>Response: &lt<i>None</i>&gt</h2>
-    {% endif %}
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='home.css') }}">
+  <title>Hello, world!</title>
+</head>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1>API Response Viewer</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="col min-vh-70" style="background-color:honeydew">
+      {% if URL %}
+      <div class="row">
+        <div class="col">
+          <h2>API is at: &lt{{URL}}&gt.</h2>      
+        </div>
+      </div>
+      {% endif %}
+      <div class="row">
+        {% if source %}
+          <div class="col w-50">
+            <h2>Full Response ({{source | length}}):</h2>
+            {% for obj in source %}
+              <div>{{obj}}</div>
+            {% endfor %}
+          </div>
+
+        {% if models %}
+        <div class="col w-30">
+          <h2>Models ({{models | length}}):</h2>
+          {% for obj in models %}
+            <div>{{obj}}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% else %}
+          <h2>Response: &lt<i>None</i>&gt</h2>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

@@ -9,7 +9,7 @@ from asyncio import run
 class _run:
   """Request count, limit"""
   call_count = 0
-  call_limit = 10
+  call_limit = 25
 
 
 class ResponseWrapper:
@@ -70,4 +70,5 @@ def get(url: str) -> models.Request:
 def get_json(url: str) -> dict:
   """Get Request as dict (json)"""
   resp = get(url)
+  print(resp.json(), flush=True)
   return resp.json()
