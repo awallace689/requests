@@ -1,4 +1,20 @@
+:root {
+  --header-color: #D0F0C0;
+  --page-color: #FDF8DC;
+  --content-color: #ebcb8c;
+}
+
 .headerbar {
-  background-color: palegreen;
-  box-shadow: 5px 5px;
+  background-color: var(--header-color);
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.main-page {
+  background-color: var(--page-color);
+}
+
+.content {
+  background-color: var(--content-color);
+  margin: 10px;
+  padding: 12px;
 }
