@@ -12,6 +12,7 @@
 .main-page {
   background-color: var(--page-color);
   margin-bottom: 16px;
+  margin-top: 4px;
 }
 
 .content {
