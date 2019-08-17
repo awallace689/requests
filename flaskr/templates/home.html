@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='home.css') }}">
-  <title>Hello, world!</title>
+  <title>API Response Viewer</title>
 </head>
 
 <body>
@@ -23,7 +23,7 @@
   </div>
 
     <div class="container">
-      <div class="col min-vh-70 main-page">
+      <div class="col main-page">
         {% if URL %}
           <div class="row">
             <div class="col">
@@ -31,28 +31,40 @@
             </div>
           </div>
         {% endif %}
-          <div class="row">
-            {% if source %}
-              <div class="col">
-                <h2>Full Response ({{source | length}}):</h2>
-                {% for obj in source %}
-                  <div class="content">{{obj}}</div>
-                {% endfor %}
-              </div>
-
-              {% if models %}
-                <div class="col">
-                  <h2>Models ({{models | length}}):</h2>
-                  {% for obj in models %}
-                    <div class="content">{{obj}}</div>
+        
+        <div class="row">
+          
+          {% if source %}
+            <div class="col">
+              <h3>Full Response {% if is_list %}({{source | length}}){% else %}(1){% endif %}:</h3>
+              {% if is_list %}
+                <div class="content rounded">
+                  {% for obj in source %}
+                    <h5>({{ loop.index }})</h5>
+                    <div class="content-item">{{obj}}</div>
                   {% endfor %}
                 </div>
+              {% else %}
+                <div class="content rounded">{{source}}</div>
               {% endif %}
-
-            {% else %}
-              <h2>Response: &lt<i>None</i>&gt</h2>
+            </div>
+            {% if models %}
+              <div class="col">
+                <h3>Models ({{models | length}}):</h3>
+                <div class="content rounded">
+                  {% for obj in models %}
+                    <h5>({{ loop.index }})</h5>
+                    <div class="content-item">{{obj}}</div>
+                  {% endfor %}
+                </div>
+              </div>
             {% endif %}
-          </div>
+
+          {% else %}
+            <h2>Response: &lt<i>None</i>&gt</h2>
+          {% endif %}
+
+        </div>
       </div>
     </div>
 

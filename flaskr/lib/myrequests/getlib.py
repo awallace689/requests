@@ -2,8 +2,7 @@ from typing import List
 from copy import deepcopy
 from typing import Dict, List, Any
 from json import dumps
-from requests import get as _get, models
-from asyncio import run
+from requests import get as _get, models, Response
 
 
 class _run:
@@ -14,12 +13,9 @@ class _run:
 
 class ResponseWrapper:
   """'requests' library 'get' response wrapper"""
-
   def __init__(self, json, debug=False):
     self._source: List[dict] = json
     self._models: List[dict] = self._get_models()
-    self.debug = debug
-    
     if debug:
       self.print_info()
 
@@ -57,7 +53,7 @@ class ResponseWrapper:
     return models
   
 
-def get(url: str) -> models.Request:
+def get(url: str) -> models.Response:
   """Restrict # of calls to _run.call_limit"""
   if _run.call_count < _run.call_limit:
     _run.call_count += 1
@@ -65,10 +61,3 @@ def get(url: str) -> models.Request:
   else:
     raise RuntimeError(
       f'ERROR: Call limit ({str(_run.call_count)}) exceeded.')
-
-
-def get_json(url: str) -> dict:
-  """Get Request as dict (json)"""
-  resp = get(url)
-  print(resp.json(), flush=True)
-  return resp.json()

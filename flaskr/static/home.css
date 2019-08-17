@@ -11,10 +11,21 @@
 
 .main-page {
   background-color: var(--page-color);
+  margin-bottom: 16px;
 }
 
 .content {
   background-color: var(--content-color);
-  margin: 10px;
+  overflow-y: auto;
+  /* margin: 10px; */
   padding: 12px;
+  max-height: 75vh;
+}
+
+.content-item { 
+  margin-bottom: 16px;
+}
+
+body {
+  background-color: var(--page-color);
 }
