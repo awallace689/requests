@@ -14,16 +14,16 @@
 </head>
 
 <body>
-  <nav class="container-fluid navbar headerbar sticky-top">
-    <a class="navbar-brand" href="{{url_for('home')}}">
-      <img id="navbar-icon" src="{{url_for('static', filename='assets/icons8-open-book-64.png')}}" />
-      Response Viewer
-    </a>
-    <a class="navbar-text {{'active' if request.path == '/home/'}}" href="{{url_for('home')}}">
-      Home
-    </a>
-    <a class="navbar-text" href="https://www.github.com/awallace689/requests">
-      GitHub
+  <nav class="container-fluid headerbar sticky-top">
+      <a class="navbar-brand" href="{{url_for('home')}}">
+        <img id="navbar-icon" src="{{url_for('static', filename='assets/icons8-open-book-64.png')}}" />
+        Response Viewer
+      </a>
+      <a class=" navbar-el {{'active' if request.path == '/home/'}}" href="{{url_for('home')}}">
+        Home
+      </a>
+      <a class="navbar-el" href="https://www.github.com/awallace689/requests">
+        GitHub
     </a>
   </nav>
 
